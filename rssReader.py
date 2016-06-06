@@ -25,18 +25,24 @@ print("Description: " + rssChannel.getString("description"))
 #  For each item in the channel, display the title, link,
 #  publish date, and categories assigned to the post.
 numItems = rssChannel.get_NumItems()
-
+count = 0
 for i in range(0,numItems):
     # rssItem is a CkRss
     rssItem = rssChannel.GetItem(i)
-
+    
     print("----")
+    titletoup = rssItem.getString("title").upper()
+    if ("SEX" in titletoup):
+        count += 1
+    elif("TRUMP" in titletoup):
+        count += 1
+
     print("Title: " + rssItem.getString("title"))
     print("Link: " + rssItem.getString("link"))
     print("pubDate: " + rssItem.getString("pubDate"))
 
     numCategories = rssItem.GetCount("category")
-
     if (numCategories > 0):
         for j in range(0,numCategories):
             print("    category: " + rssItem.mGetString("category",j))
+print(count)
